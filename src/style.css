@@ -1,0 +1,63 @@
+:root {
+  --search-font: 25px;
+  --search-width: 250px;
+}
+
+@font-face {
+  font-family: Lumina;
+  src: url(fonts/LUMINA.ttf);
+}
+
+@font-face {
+  font-family: coolvetica;
+  src: url(fonts/coolvetica\ rg.otf);
+}
+
+@font-face {
+  font-family: LemonMilk;
+  src: url(fonts/LEMONMILK-Regular.otf);
+}
+
+body {
+  background-color: rgb(122, 190, 242);
+}
+
+h1 {
+  font-size: 24px;
+  text-align: center;
+  font-family: LemonMilk;
+
+  & span {
+    font-size: 72px;
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+form input,
+form button {
+  font-size: var(--search-font);
+  line-height: calc(var(--search-font) + 2px);
+  width: calc(var(--search-width) / 2);
+  padding: 0px;
+  box-sizing: border-box;
+  border: 0px;
+  text-align: center;
+}
+
+form input {
+  width: var(--search-width);
+}
+
+form button {
+  background-color: rgba(0, 0, 0, 0);
+  border-bottom: 2px white solid;
+  color: white;
+  width: calc(var(--search-width) / 2);
+}
