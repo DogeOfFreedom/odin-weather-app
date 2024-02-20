@@ -29,18 +29,28 @@ const getWeatherData = async () => {
     const minTempCelcius = forcast.day.mintemp_c;
     const humidity = forcast.day.avghumidity;
 
+    const forecastDay = document.createElement("div");
+    forecastDay.className = "forcast-day";
+    const dayElement = document.createElement("h1");
+    dayElement.textContent = day;
+    const conditionElement = document.createElement("p");
+    conditionElement.textContent = condition;
     const conditionIcon = document.createElement("img");
     conditionIcon.src = conditionIconSrc;
-    weatherContent.appendChild(conditionIcon);
+    const maxTempElement = document.createElement("p");
+    maxTempElement.textContent = maxTempCelcius;
+    const minTempElement = document.createElement("p");
+    minTempElement.textContent = minTempCelcius;
+    const humidityElement = document.createElement("p");
+    humidityElement.textContent = humidity;
 
-    console.log(
-      day,
-      condition,
-      conditionIcon,
-      maxTempCelcius,
-      minTempCelcius,
-      humidity
-    );
+    forecastDay.appendChild(dayElement);
+    forecastDay.appendChild(conditionElement);
+    forecastDay.appendChild(conditionIcon);
+    forecastDay.appendChild(maxTempElement);
+    forecastDay.appendChild(minTempElement);
+    forecastDay.appendChild(humidityElement);
+    weatherContent.appendChild(forecastDay);
   });
 };
 
