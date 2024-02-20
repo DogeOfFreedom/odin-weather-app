@@ -48,10 +48,10 @@ const getWeatherData = async () => {
     forecastDay.className = "forcast-day";
     const dayElement = document.createElement("h1");
     dayElement.textContent = `${dayName} ${months[date[0] - 1]} ${date[1]}`;
-    const conditionElement = document.createElement("p");
-    conditionElement.textContent = condition;
     const conditionIcon = document.createElement("img");
     conditionIcon.src = conditionIconSrc;
+    const conditionElement = document.createElement("p");
+    conditionElement.textContent = condition;
     const maxTempElement = document.createElement("p");
     maxTempElement.textContent = `Max Temperature: ${maxTempCelcius}`;
     const minTempElement = document.createElement("p");
@@ -60,8 +60,8 @@ const getWeatherData = async () => {
     humidityElement.textContent = `Humidity: ${humidity}%`;
 
     forecastDay.appendChild(dayElement);
-    forecastDay.appendChild(conditionElement);
     forecastDay.appendChild(conditionIcon);
+    forecastDay.appendChild(conditionElement);
     forecastDay.appendChild(maxTempElement);
     forecastDay.appendChild(minTempElement);
     forecastDay.appendChild(humidityElement);
