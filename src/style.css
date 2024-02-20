@@ -61,3 +61,11 @@ form button {
   color: white;
   width: calc(var(--search-width) / 2);
 }
+
+.weather-container {
+  display: flex;
+}
+
+.weather-container > div {
+  flex: auto;
+}

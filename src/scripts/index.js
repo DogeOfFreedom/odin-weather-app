@@ -12,6 +12,20 @@ const days = [
   "Friday",
   "Saturday",
 ];
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 
 const getWeatherData = async () => {
   const searchTerm = searchInput.value;
@@ -21,8 +35,9 @@ const getWeatherData = async () => {
   const forecastData = (await response.json()).forecast.forecastday;
 
   forecastData.forEach((forcast) => {
-    const date = new Date(forcast.date);
-    const day = days[date.getDay()];
+    const dateObj = new Date(forcast.date);
+    const date = forcast.date.split("-").slice(1);
+    const dayName = days[dateObj.getDay()];
     const condition = forcast.day.condition.text;
     const conditionIconSrc = forcast.day.condition.icon;
     const maxTempCelcius = forcast.day.maxtemp_c;
@@ -32,17 +47,17 @@ const getWeatherData = async () => {
     const forecastDay = document.createElement("div");
     forecastDay.className = "forcast-day";
     const dayElement = document.createElement("h1");
-    dayElement.textContent = day;
+    dayElement.textContent = `${dayName} ${months[date[0] - 1]} ${date[1]}`;
     const conditionElement = document.createElement("p");
     conditionElement.textContent = condition;
     const conditionIcon = document.createElement("img");
     conditionIcon.src = conditionIconSrc;
     const maxTempElement = document.createElement("p");
-    maxTempElement.textContent = maxTempCelcius;
+    maxTempElement.textContent = `Max Temperature: ${maxTempCelcius}`;
     const minTempElement = document.createElement("p");
-    minTempElement.textContent = minTempCelcius;
+    minTempElement.textContent = `Min Temperature: ${minTempCelcius}`;
     const humidityElement = document.createElement("p");
-    humidityElement.textContent = humidity;
+    humidityElement.textContent = `Humidity: ${humidity}%`;
 
     forecastDay.appendChild(dayElement);
     forecastDay.appendChild(conditionElement);
