@@ -3,6 +3,7 @@ import "../style.css";
 const weatherForm = document.querySelector(".weather-form");
 const weatherContent = document.querySelector(".weather-container");
 const searchInput = document.querySelector("input");
+const loader = document.querySelector(".loader");
 const days = [
   "Sunday",
   "Monday",
@@ -33,6 +34,9 @@ const getWeatherData = async () => {
   const url = `http://api.weatherapi.com/v1/forecast.json?key=${key}&q=${searchTerm}&days=7&aqi=no&alerts=no`;
   const response = await fetch(url, { mode: "cors" });
   const forecastData = (await response.json()).forecast.forecastday;
+
+  // remove loader
+  loader.classList.add("hidden");
 
   forecastData.forEach((forcast) => {
     const dateObj = new Date(forcast.date);
@@ -72,4 +76,7 @@ const getWeatherData = async () => {
 weatherForm.addEventListener("submit", (e) => {
   e.preventDefault();
   getWeatherData();
+
+  // show loader
+  loader.classList.remove("hidden");
 });
