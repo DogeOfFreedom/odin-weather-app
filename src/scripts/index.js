@@ -1,7 +1,7 @@
 import "../style.css";
 
 const weatherForm = document.querySelector(".weather-form");
-const weatherContent = document.querySelector(".weather-container");
+const forecastContent = document.querySelector(".forecast-container");
 const searchInput = document.querySelector("input");
 const loader = document.querySelector(".loader");
 const days = [
@@ -35,6 +35,9 @@ const getWeatherData = async () => {
   const response = await fetch(url, { mode: "cors" });
   const forecastData = (await response.json()).forecast.forecastday;
 
+  // Need to handle 400 errors when the searched country does not exist
+  console.log(forecastData);
+
   // remove loader
   loader.classList.add("hidden");
 
@@ -49,7 +52,7 @@ const getWeatherData = async () => {
     const humidity = forcast.day.avghumidity;
 
     const forecastDay = document.createElement("div");
-    forecastDay.className = "forcast-day";
+    forecastDay.className = "forecast-day";
     const dayElement = document.createElement("h1");
     dayElement.textContent = `${dayName} ${months[date[0] - 1]} ${date[1]}`;
     const conditionIcon = document.createElement("img");
@@ -57,9 +60,9 @@ const getWeatherData = async () => {
     const conditionElement = document.createElement("p");
     conditionElement.textContent = condition;
     const maxTempElement = document.createElement("p");
-    maxTempElement.textContent = `Max Temperature: ${maxTempCelcius}`;
+    maxTempElement.innerHTML = `Max Temperature: ${maxTempCelcius} &#8451`;
     const minTempElement = document.createElement("p");
-    minTempElement.textContent = `Min Temperature: ${minTempCelcius}`;
+    minTempElement.innerHTML = `Min Temperature: ${minTempCelcius} &#8451`;
     const humidityElement = document.createElement("p");
     humidityElement.textContent = `Humidity: ${humidity}%`;
 
@@ -69,13 +72,16 @@ const getWeatherData = async () => {
     forecastDay.appendChild(maxTempElement);
     forecastDay.appendChild(minTempElement);
     forecastDay.appendChild(humidityElement);
-    weatherContent.appendChild(forecastDay);
+    forecastContent.appendChild(forecastDay);
   });
 };
 
 weatherForm.addEventListener("submit", (e) => {
   e.preventDefault();
   getWeatherData();
+
+  // clean up previous data
+  forecastContent.innerHTML = "";
 
   // show loader
   loader.classList.remove("hidden");
