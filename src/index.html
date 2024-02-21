@@ -8,17 +8,15 @@
   <body>
     <header>
       <h1>The<span>Weather</span></h1>
-    </header>
-    <div>
-      <form class="weather-form" action="." method="post" novalidate>
+      <form class="weather-form" action="." method="post">
         <input type="text" id="country" required />
         <span class="err-msg"></span>
         <button type="submit">Search</button>
       </form>
-    </div>
+    </header>
     <div class="weather-container">
       <div class="loader hidden"></div>
-      <div class="forecast-container"></div>
+      <div class="weather-data-container"></div>
     </div>
   </body>
 </html>

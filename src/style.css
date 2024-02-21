@@ -1,6 +1,12 @@
 :root {
   --search-font: 25px;
   --search-width: 250px;
+
+  --header-width: 400px;
+  --header-height: 210px;
+
+  --number-of-days: 7;
+  --weather-item-width: calc(100vw / var(--number-of-days));
 }
 
 .hidden {
@@ -24,6 +30,7 @@
 
 body {
   background-color: rgb(122, 190, 242);
+  margin: 0px;
 }
 
 h1 {
@@ -34,6 +41,14 @@ h1 {
   & span {
     font-size: 72px;
   }
+}
+
+header {
+  position: absolute;
+  width: var(--header-width);
+  height: var(--header-height);
+  left: calc(50% - calc(var(--header-width) / 2));
+  z-index: 10;
 }
 
 form {
@@ -74,19 +89,58 @@ form button {
 
 .weather-container {
   position: relative;
-  margin: 75px 20px;
 }
 
-.forecast-container {
+.weather-data-container {
   display: flex;
   justify-content: space-evenly;
 }
 
-.forecast-day {
-  width: 350px;
+.weather-item {
+  width: var(--weather-item-width);
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 1400px) {
+  .weather-data-container {
+    flex-direction: column;
+  }
+
+  .weather-item {
+    --item-height: calc(100vh / var(--number-of-days));
+
+    flex-direction: row;
+    justify-content: flex-start;
+    height: var(--item-height);
+    padding-left: 20px;
+    width: 100%;
+  }
+
+  header {
+    --right-padding: 20px;
+
+    top: calc(50% - calc(var(--header-height) / 2));
+    left: calc(100% - var(--header-width) - var(--right-padding));
+  }
+
+  .day {
+    width: 200px;
+    text-align: left;
+  }
+
+  .condition-container {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .metric-container {
+  }
 }
 
 .loader {
