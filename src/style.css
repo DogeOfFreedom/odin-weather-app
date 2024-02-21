@@ -101,6 +101,13 @@ form button {
   justify-content: center;
 }
 
+.condition-container {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 @media only screen and (max-width: 1400px) {
   .weather-data-container {
     flex-direction: column;
@@ -126,13 +133,6 @@ form button {
   .day {
     width: 200px;
     text-align: left;
-  }
-
-  .condition-container {
-    width: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
 }
 

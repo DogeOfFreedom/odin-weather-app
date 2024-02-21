@@ -27,7 +27,7 @@ const populateWeatherData = (forecastData) => {
     const date = forcast.date.split("-").slice(1);
     const dayName = days[dateObj.getDay()];
     const condition = forcast.day.condition.text;
-    const conditionIconSrc = forcast.day.condition.icon;
+    const conditionIconSrc = `https:${forcast.day.condition.icon}`;
     const maxTempCelcius = forcast.day.maxtemp_c;
     const minTempCelcius = forcast.day.mintemp_c;
     const humidity = forcast.day.avghumidity;
