@@ -10,8 +10,9 @@
       <h1>The<span>Weather</span></h1>
     </header>
     <div>
-      <form class="weather-form" action="." method="post">
-        <input type="text" id="country" />
+      <form class="weather-form" action="." method="post" novalidate>
+        <input type="text" id="country" required />
+        <span class="err-msg"></span>
         <button type="submit">Search</button>
       </form>
     </div>

@@ -4,6 +4,7 @@ const weatherForm = document.querySelector(".weather-form");
 const forecastContent = document.querySelector(".forecast-container");
 const searchInput = document.querySelector("input");
 const loader = document.querySelector(".loader");
+const errMsg = document.querySelector(".err-msg");
 const days = [
   "Sunday",
   "Monday",
@@ -28,19 +29,7 @@ const months = [
   "Dec",
 ];
 
-const getWeatherData = async () => {
-  const searchTerm = searchInput.value;
-  const key = "30bd2286b09543ebbbe233108241702";
-  const url = `http://api.weatherapi.com/v1/forecast.json?key=${key}&q=${searchTerm}&days=7&aqi=no&alerts=no`;
-  const response = await fetch(url, { mode: "cors" });
-  const forecastData = (await response.json()).forecast.forecastday;
-
-  // Need to handle 400 errors when the searched country does not exist
-  console.log(forecastData);
-
-  // remove loader
-  loader.classList.add("hidden");
-
+const populateWeatherData = (forecastData) => {
   forecastData.forEach((forcast) => {
     const dateObj = new Date(forcast.date);
     const date = forcast.date.split("-").slice(1);
@@ -76,13 +65,42 @@ const getWeatherData = async () => {
   });
 };
 
+const getWeatherData = async () => {
+  const searchTerm = searchInput.value;
+  const key = "30bd2286b09543ebbbe233108241702";
+  const url = `http://api.weatherapi.com/v1/forecast.json?key=${key}&q=${searchTerm}&days=7&aqi=no&alerts=no`;
+  const response = await fetch(url, { mode: "cors" });
+
+  if (response.status !== 200) {
+    errMsg.textContent = "Country is invalid";
+  } else {
+    const forecastData = (await response.json()).forecast.forecastday;
+    populateWeatherData(forecastData);
+  }
+
+  // remove loader
+  loader.classList.add("hidden");
+};
+
+const input = document.querySelector("#country");
 weatherForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  getWeatherData();
 
-  // clean up previous data
-  forecastContent.innerHTML = "";
+  const countryRegex = /^[a-zA-Z ]*$/;
 
-  // show loader
-  loader.classList.remove("hidden");
+  if (input.validity.valueMissing) {
+    errMsg.textContent = "Country cannot be empty";
+  } else if (!countryRegex.test(input.value)) {
+    errMsg.textContent = "Country cannot contain numbers or special characters";
+  } else {
+    errMsg.textContent = "";
+
+    // clean up previous data
+    forecastContent.innerHTML = "";
+
+    // show loader
+    loader.classList.remove("hidden");
+
+    getWeatherData();
+  }
 });

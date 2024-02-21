@@ -55,8 +55,14 @@ form button {
   text-align: center;
 }
 
-form input {
+form input,
+form span {
   width: var(--search-width);
+}
+
+form span {
+  border: 1px solid black;
+  text-align: center;
 }
 
 form button {
