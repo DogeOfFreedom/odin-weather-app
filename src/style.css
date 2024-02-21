@@ -87,10 +87,6 @@ form button {
   width: calc(var(--search-width) / 2);
 }
 
-.weather-container {
-  position: relative;
-}
-
 .weather-data-container {
   display: flex;
   justify-content: space-evenly;
@@ -138,9 +134,6 @@ form button {
     flex-direction: column;
     align-items: center;
   }
-
-  .metric-container {
-  }
 }
 
 .loader {
@@ -152,6 +145,7 @@ form button {
   border-radius: 50%;
   width: var(--len);
   height: var(--len);
+  top: calc(50% - calc(calc(var(--len) + var(--border) * 2) / 2));
   left: calc(50% - calc(calc(var(--len) + var(--border) * 2) / 2));
   position: absolute;
   animation: spin 2s linear infinite;

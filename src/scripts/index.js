@@ -2,7 +2,7 @@ import "../style.css";
 
 const weatherForm = document.querySelector(".weather-form");
 const weatherContent = document.querySelector(".weather-data-container");
-// const searchInput = document.querySelector("input");
+const searchInput = document.querySelector("input");
 const loader = document.querySelector(".loader");
 const errMsg = document.querySelector(".err-msg");
 const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
@@ -68,8 +68,8 @@ const populateWeatherData = (forecastData) => {
 };
 
 const getWeatherData = async () => {
-  // const searchTerm = searchInput.value;
-  const searchTerm = "singapore";
+  const searchTerm = searchInput.value;
+  // const searchTerm = "singapore";
 
   const key = "30bd2286b09543ebbbe233108241702";
   const url = `http://api.weatherapi.com/v1/forecast.json?key=${key}&q=${searchTerm}&days=7&aqi=no&alerts=no`;
@@ -108,5 +108,3 @@ weatherForm.addEventListener("submit", (e) => {
     getWeatherData();
   }
 });
-
-getWeatherData();
